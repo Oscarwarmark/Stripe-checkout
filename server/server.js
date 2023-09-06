@@ -1,11 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const app = express();
+const checkoutRoutes = require("./routes/checkout.route");
 
 const CLIENT_URL = "http://localhost:5173";
+const app = express();
 
 app.use(
   cors({
@@ -14,8 +14,6 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello from express");
-});
+app.use("/create-checkout-session", checkoutRoutes);
 
 app.listen(3000, () => console.log("server is up and running"));
