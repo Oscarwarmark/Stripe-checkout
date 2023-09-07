@@ -1,0 +1,15 @@
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
+
+interface CartContext {}
+
+export const MyCartContext = createContext<CartContext>({});
+
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+
+const CartProvider = ({ children }: PropsWithChildren<{}>) => {
+  const [items, setItems] = useState<ICartItem[]>(cartFromLocalStorage);
+
+  return <MyCartContext.Provider value={{}}>{children}</MyCartContext.Provider>;
+};
+
+export default CartProvider;

@@ -1,0 +1,12 @@
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(25, 86, 119);
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  margin-right: 3rem;
+}

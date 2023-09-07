@@ -1,32 +1,50 @@
+import Header from "./Header";
+import { useEffect, useState } from "react";
+import "../Styles/home.css";
+
 const Home = () => {
-  const cart = [
-    { product: "price_1Nn3QjJXDhsfJroG5CWKs0pB", quantity: 1 },
-    { product: "price_1Nn3YfJXDhsfJroGB7MCENnY", quantity: 1 },
-  ];
+  const [stripeProducts, setStripeProducts] = useState([]);
 
-  async function HandelPayment() {
-    const response = await fetch(
-      "http://localhost:3000/create-checkout-session",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cart),
+  useEffect(() => {
+    async function ListOfProducts() {
+      try {
+        const response = await fetch("http://localhost:3000/getProducts", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const productsData = await response.json();
+        console.log(productsData);
+        setStripeProducts(productsData);
+      } catch (error) {
+        console.error("Error retrieving products:", error);
       }
-    );
-
-    if (!response.ok) {
-      return;
     }
 
-    const { url } = await response.json();
-    window.location = url;
-  }
-
+    ListOfProducts();
+  }, []);
   return (
     <div>
-      <button onClick={HandelPayment}>Ge mig pengar</button>
+      <Header />
+      <div>
+        <div className="main-container">
+          {stripeProducts.map((product, i) => (
+            <div key={i} className="product-card">
+              <img src={`${product.images}`} alt="" />
+              <h1>{product.name}</h1>
+              <p>{product.description}</p>
+              <button>lägg till i kundvagn</button>
+            </div>
+          ))}
+        </div>
+        <div></div>
+      </div>
     </div>
   );
 };
