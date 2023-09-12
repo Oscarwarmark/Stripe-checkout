@@ -1,9 +1,19 @@
 import Header from "./Header";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { MyCartContext } from "../context/cartContext";
 import "../Styles/home.css";
 
+interface IProduct {
+  name: string;
+  description: string;
+  images: string[];
+}
+
 const Home = () => {
-  const [stripeProducts, setStripeProducts] = useState([]);
+  const { products, setProducts, cartItems, setCartItems } =
+    useContext(MyCartContext);
+
+  // const [stripeProducts, setStripeProducts] = useState([]);
 
   useEffect(() => {
     async function ListOfProducts() {
@@ -21,7 +31,7 @@ const Home = () => {
 
         const productsData = await response.json();
         console.log(productsData);
-        setStripeProducts(productsData);
+        setProducts(productsData);
       } catch (error) {
         console.error("Error retrieving products:", error);
       }
@@ -29,17 +39,48 @@ const Home = () => {
 
     ListOfProducts();
   }, []);
+
+  const handleClick = (product: any) => {
+    // Check if the product is already in the cart
+    const existingCartItem = cartItems.find(
+      (item) => item.product.id === product.id
+    );
+
+    if (existingCartItem) {
+      // If it exists, update the quantity
+      const updatedCartItems = cartItems.map(
+        (item: { product: number; quantity: number }) => {
+          if (item.product.id === product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        }
+      );
+
+      setCartItems(updatedCartItems);
+    } else {
+      // If it doesn't exist, add a new entry with quantity 1
+      setCartItems([...cartItems, { product: product, quantity: 1 }]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+
   return (
     <div>
       <Header />
       <div>
         <div className="main-container">
-          {stripeProducts.map((product, i) => (
+          {products.map((product: IProduct, i) => (
             <div key={i} className="product-card">
               <img src={`${product.images}`} alt="" />
               <h1>{product.name}</h1>
               <p>{product.description}</p>
-              <button>lägg till i kundvagn</button>
+              <button onClick={() => handleClick(product)}>
+                lägg till i kundvagn
+              </button>
             </div>
           ))}
         </div>

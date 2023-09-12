@@ -2,11 +2,32 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(25, 86, 119);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
 }
 
 .buttons-container {
   display: flex;
   align-items: center;
   margin-right: 3rem;
+}
+
+.header-button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #141414;
+  margin-right: 0.5rem;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #1b1b1b;
+  font-weight: 300;
+  background-color: transparent;
+  height: 2rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+.header-button:hover {
+  color: #000000;
+  background-color: #cbcbcb51;
+  cursor: pointer;
 }

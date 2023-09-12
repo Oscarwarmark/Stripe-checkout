@@ -6,8 +6,8 @@ const Header = () => {
     <div className="header-container">
       <h1>Aplikationens namn</h1>
       <div className="buttons-container">
-        <button>Logga in</button>
-        <button>
+        <button className="header-button">Logga in</button>
+        <button className="header-button">
           <Link to="/cart">Cart</Link>
         </button>
       </div>

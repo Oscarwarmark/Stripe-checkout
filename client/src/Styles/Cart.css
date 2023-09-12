@@ -3,3 +3,14 @@
   align-items: center;
   flex-direction: column;
 }
+
+.products-container {
+  display: flex;
+}
+
+.form-container {
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
