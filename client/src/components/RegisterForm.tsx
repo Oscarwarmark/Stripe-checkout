@@ -2,7 +2,7 @@ import { UserContext } from "../context/userContext";
 import { useContext } from "react";
 
 const RegisterForm = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { isLoggedIn, userData, setUserData } = useContext(UserContext);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -13,7 +13,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/createCustomer", {
+    const response = await fetch("http://localhost:3000/customer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,34 +22,40 @@ const RegisterForm = () => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch products");
+      throw new Error("Failed to fetch ");
     }
   };
 
   return (
     <>
-      <p>Eller registrera dig nedan</p>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <input
-          placeholder="namn"
-          type="text"
-          name="name"
-          onChange={handleChange}
-        />
-        <input
-          placeholder="Email"
-          type="text"
-          name="email"
-          onChange={handleChange}
-        />
-        <input
-          placeholder="lösenord"
-          type="text"
-          name="password"
-          onChange={handleChange}
-        />
-        <button type="submit">register</button>
-      </form>
+      {isLoggedIn ? (
+        <div></div>
+      ) : (
+        <div>
+          <p>Eller registrera dig nedan</p>
+          <form className="form-container" onSubmit={handleSubmit}>
+            <input
+              placeholder="namn"
+              type="text"
+              name="name"
+              onChange={handleChange}
+            />
+            <input
+              placeholder="Email"
+              type="text"
+              name="email"
+              onChange={handleChange}
+            />
+            <input
+              placeholder="lösenord"
+              type="text"
+              name="password"
+              onChange={handleChange}
+            />
+            <button type="submit">register</button>
+          </form>
+        </div>
+      )}
     </>
   );
 };

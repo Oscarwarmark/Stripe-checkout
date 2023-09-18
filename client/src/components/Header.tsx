@@ -1,15 +1,19 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../Styles/Header.css";
-
+import SignIn from "./SignIn";
+import Button from "@mui/material/Button";
 const Header = () => {
   return (
     <div className="header-container">
-      <h1>Aplikationens namn</h1>
+      <NavLink to="/" className="title">
+        <h1>Oscars Hattar</h1>
+      </NavLink>
+
       <div className="buttons-container">
-        <button className="header-button">Logga in</button>
-        <button className="header-button">
-          <Link to="/cart">Cart</Link>
-        </button>
+        <SignIn />
+        <Button variant="outlined" className="header-button">
+          <NavLink to="/cart">Cart</NavLink>
+        </Button>
       </div>
     </div>
   );

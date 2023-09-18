@@ -4,6 +4,7 @@ const stripe = initStripe();
 const CLIENT_URL = "http://localhost:5173";
 
 const createCheckoutSession = async (req, res) => {
+  console.log("test", req.session.id);
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: req.body.map((item) => {
@@ -12,6 +13,7 @@ const createCheckoutSession = async (req, res) => {
           quantity: item.quantity,
         };
       }),
+      customer: req.session.id,
       mode: "payment",
       success_url: `${CLIENT_URL}/confirmation`,
       cancel_url: CLIENT_URL,

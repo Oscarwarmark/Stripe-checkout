@@ -4,5 +4,23 @@
     "name": "ny",
     "email": "ny@gmail.com",
     "password": "$2b$10$yIHsAiah4mt9tyzXjMHGkuHodTJ0qaUIan4bXaFGEuD9AC58Wbnjy"
+  },
+  {
+    "id": "cus_Od7m4l22TP780a",
+    "name": "oscar",
+    "email": "oscar.warmark@gmail.com",
+    "password": "$2b$10$TCXvyTvcYEbch0oELhVzbeBesD2gJXdO2TiRX9NPMM180in.ApktW"
+  },
+  {
+    "id": "cus_Od7rj1Zz0VNEmD",
+    "name": "carl ",
+    "email": "car.carlsson@gmail.com",
+    "password": "$2b$10$rrysqQ9/SptBWn/FeggaoOtgGhcwwK94mvA0.oA7n8sW8Wa7fQFlm"
+  },
+  {
+    "id": "cus_Od8T0qFRx2tRpq",
+    "name": "",
+    "email": null,
+    "password": "$2b$10$VihFwBniKK5B8bw/wdUKn.jKw807zGXxDwpde7KDcD3t4ch6SoWfK"
   }
 ]

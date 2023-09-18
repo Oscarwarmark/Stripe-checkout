@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     async function ListOfProducts() {
       try {
-        const response = await fetch("http://localhost:3000/getProducts", {
+        const response = await fetch("http://localhost:3000/api/getProducts", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

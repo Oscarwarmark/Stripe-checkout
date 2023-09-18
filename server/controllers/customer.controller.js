@@ -43,4 +43,44 @@ const createCustomer = async (req, res) => {
   }
 };
 
-module.exports = { createCustomer };
+const logInCustomer = async (req, res) => {
+  const UserData = req.body;
+  //   console.log(UserData);
+
+  fs.readFile(CustomerDB, "utf-8", async (err, data) => {
+    if (err) {
+      console.log(err.message);
+    } else {
+      const customersInDB = JSON.parse(data);
+      //   console.log(customersInDB);
+
+      const existingUser = customersInDB.find(
+        (user) => user.email === UserData.email
+      );
+      //   console.log("här!", existingUser);
+
+      const match = await bcrypt.compare(
+        UserData.password,
+        existingUser.password
+      );
+
+      if (match) {
+        delete existingUser.password;
+        req.session = existingUser;
+        res.status(201).json(req.session);
+        console.log(req.session);
+      } else {
+        res.status(401).json("wrong password");
+        console.log("wrong password");
+      }
+    }
+  });
+};
+
+const logOutCustomer = async (req, res) => {
+  req.session = null;
+  res.status(201).json(req.session);
+  console.log("signed out", req.session);
+};
+
+module.exports = { createCustomer, logInCustomer, logOutCustomer };

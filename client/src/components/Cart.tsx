@@ -1,40 +1,37 @@
 import Header from "./Header";
+import SignIn from "./SignIn";
 import RegisterForm from "./RegisterForm";
 import "../Styles/Cart.css";
 import { MyCartContext } from "../context/cartContext";
 import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+import Button from "@mui/material/Button";
 
 interface IProduct {
   product: any;
   name: string;
   description: string;
   images: string[];
+  quantity: string;
 }
 
 const Cart = () => {
   const { cartItems } = useContext(MyCartContext);
+  const { isLoggedIn } = useContext(UserContext);
 
-  // const cart = [
-  //   { product: "price_1Nn3QjJXDhsfJroG5CWKs0pB", quantity: 1 },
-  //   { product: "price_1Nn3YfJXDhsfJroGB7MCENnY", quantity: 1 },
-  // ];
-
-  const cart = cartItems.map((item) => ({
+  const cart = cartItems.map((item: IProduct) => ({
     product: item.product.default_price,
     quantity: item.quantity,
   }));
 
   async function HandelPayment() {
-    const response = await fetch(
-      "http://localhost:3000/create-checkout-session",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cart),
-      }
-    );
+    const response = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cart),
+    });
 
     if (!response.ok) {
       return;
@@ -54,20 +51,31 @@ const Cart = () => {
             <div key={i} className="product-card">
               <img src={`${product.product.images}`} alt="" />
               <h1>{product.product.name}</h1>
-              <p>{product.product.description}</p>
+
               <p>Antal: {product.quantity}</p>
             </div>
           ))}
         </div>
-        <div>
-          <p>För att handla måste du vara inloggad</p>
-          <button>Logga in</button>
-        </div>
-        <div>
-          <RegisterForm />
-        </div>
-
-        <button onClick={HandelPayment}>Gå till betalning</button>
+        {isLoggedIn ? (
+          <div>
+            <Button variant="outlined" onClick={HandelPayment}>
+              Gå till betalning
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <div>
+              <p>För att handla måste du vara inloggad</p>
+              <SignIn />
+            </div>
+            <div>
+              <RegisterForm />
+            </div>
+            <Button variant="outlined" disabled>
+              Gå till betalning
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
