@@ -6,15 +6,14 @@ body {
 }
 a {
   display: inline;
-
   cursor: pointer;
-  height: 100%;
   text-decoration: none;
   color: black;
 }
 
 .product-card {
   width: 15rem;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,9 +28,10 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  margin-top: 3rem;
 }
 
 img {
-  width: 100%;
+  height: 200px;
+  width: 200px;
 }

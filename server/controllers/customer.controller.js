@@ -36,6 +36,7 @@ const createCustomer = async (req, res) => {
             console.log(err.message);
           } else {
             console.log("New customers saved to DB");
+            res.status(201).json(newCustomer);
           }
         });
       }
@@ -45,33 +46,32 @@ const createCustomer = async (req, res) => {
 
 const logInCustomer = async (req, res) => {
   const UserData = req.body;
-  //   console.log(UserData);
 
   fs.readFile(CustomerDB, "utf-8", async (err, data) => {
     if (err) {
       console.log(err.message);
     } else {
       const customersInDB = JSON.parse(data);
-      //   console.log(customersInDB);
 
       const existingUser = customersInDB.find(
         (user) => user.email === UserData.email
       );
-      //   console.log("här!", existingUser);
 
-      const match = await bcrypt.compare(
-        UserData.password,
-        existingUser.password
-      );
+      if (existingUser) {
+        const match = await bcrypt.compare(
+          UserData.password,
+          existingUser.password
+        );
 
-      if (match) {
-        delete existingUser.password;
-        req.session = existingUser;
-        res.status(201).json(req.session);
-        console.log(req.session);
-      } else {
-        res.status(401).json("wrong password");
-        console.log("wrong password");
+        if (!match) {
+          console.log("wrong password");
+          return res.status(401).json("wrong password");
+        } else {
+          delete existingUser.password;
+          req.session = existingUser;
+          res.status(201).json(req.session);
+          console.log(req.session);
+        }
       }
     }
   });

@@ -64,12 +64,12 @@ const SignIn = () => {
     <div>
       {isLoggedIn ? (
         <Button variant="outlined" onClick={logOut}>
-          Sign out
+          Logga ut
         </Button>
       ) : (
         <>
           <Button variant="outlined" onClick={handleClickOpen}>
-            Sign in
+            Logga in
           </Button>
         </>
       )}
@@ -92,7 +92,7 @@ const SignIn = () => {
               margin="dense"
               name="password"
               label="Password"
-              type="email"
+              type="password"
               fullWidth
               variant="standard"
               onChange={handleChange}

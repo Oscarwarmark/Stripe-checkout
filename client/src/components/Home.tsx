@@ -2,6 +2,7 @@ import Header from "./Header";
 import { useEffect, useState, useContext } from "react";
 import { MyCartContext } from "../context/cartContext";
 import "../Styles/home.css";
+import Button from "@mui/material/Button";
 
 interface IProduct {
   name: string;
@@ -18,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     async function ListOfProducts() {
       try {
-        const response = await fetch("http://localhost:3000/api/getProducts", {
+        const response = await fetch("/api/getProducts", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -26,6 +27,7 @@ const Home = () => {
         });
 
         if (!response.ok) {
+          console.log(response);
           throw new Error("Failed to fetch products");
         }
 
@@ -65,8 +67,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+    console.log(products);
+  }, []);
 
   return (
     <div>
@@ -78,9 +80,9 @@ const Home = () => {
               <img src={`${product.images}`} alt="" />
               <h1>{product.name}</h1>
               <p>{product.description}</p>
-              <button onClick={() => handleClick(product)}>
+              <Button variant="outlined" onClick={() => handleClick(product)}>
                 lägg till i kundvagn
-              </button>
+              </Button>
             </div>
           ))}
         </div>

@@ -45,10 +45,10 @@ const Cart = () => {
     <div>
       <Header />
       <div className="cart-container">
+        <h2>Varor i kundvagn</h2>
         <div className="products-container">
-          <h2>Varor i kundvagn</h2>
           {cartItems.map((product: IProduct, i) => (
-            <div key={i} className="product-card">
+            <div key={i} className="cart-product-card">
               <img src={`${product.product.images}`} alt="" />
               <h1>{product.product.name}</h1>
 
@@ -65,7 +65,7 @@ const Cart = () => {
         ) : (
           <div>
             <div>
-              <p>För att handla måste du vara inloggad</p>
+              <p>Du måste vara inloggad för att handla</p>
               <SignIn />
             </div>
             <div>

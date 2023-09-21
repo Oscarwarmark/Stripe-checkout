@@ -1,7 +1,8 @@
 import { UserContext } from "../context/userContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const RegisterForm = () => {
+  const [isRegisterd, setIsRegisterd] = useState(false);
   const { isLoggedIn, userData, setUserData } = useContext(UserContext);
 
   const handleChange = (e: any) => {
@@ -13,7 +14,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/customer", {
+    const response = await fetch("/api/customer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,14 +23,18 @@ const RegisterForm = () => {
     });
 
     if (!response.ok) {
+      console.log(response);
       throw new Error("Failed to fetch ");
+    } else {
+      console.log(response);
+      setIsRegisterd(true);
     }
   };
 
   return (
     <>
-      {isLoggedIn ? (
-        <div></div>
+      {isRegisterd ? (
+        <p>Du är registrerad</p>
       ) : (
         <div>
           <p>Eller registrera dig nedan</p>
