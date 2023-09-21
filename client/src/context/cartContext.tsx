@@ -14,8 +14,6 @@ export const MyCartContext = createContext<ICartContext>({
   products: [],
 });
 
-// const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-
 const CartProvider = ({ children }: PropsWithChildren<{}>) => {
   const [cartItems, setCartItems] = useState<[]>([]);
   const [products, setProducts] = useState<[]>([]);

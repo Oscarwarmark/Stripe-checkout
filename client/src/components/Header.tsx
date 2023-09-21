@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <NavLink to="/" className="title">
-        <h1>HATTSHOPPEN</h1>
+        <h1>Oscars Webbshop</h1>
       </NavLink>
       <div className="buttons-container">
         <SignIn />

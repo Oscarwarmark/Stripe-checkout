@@ -22,7 +22,6 @@ const createCustomer = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(customerData.password, 10);
     newCustomer.password = hashedPassword;
-    console.log(newCustomer);
 
     fs.readFile(CustomerDB, "utf-8", (err, data) => {
       if (err) {

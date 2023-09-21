@@ -34,8 +34,6 @@ export const UserContext = createContext<IUserContext>({
   isLoggedIn: false,
 });
 
-// const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-
 const UserProvider = ({ children }: PropsWithChildren<{}>) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({

@@ -41,8 +41,6 @@ const SignIn = () => {
     if (!response.ok) {
       throw new Error("wrong password ");
     } else {
-      const data = await response.json();
-      console.log(data);
       setIsLoggedIn(true);
       handleClose();
     }
@@ -91,7 +89,7 @@ const SignIn = () => {
             <TextField
               margin="dense"
               name="password"
-              label="Password"
+              label="Lösenord"
               type="password"
               fullWidth
               variant="standard"

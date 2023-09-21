@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 const RegisterForm = () => {
   const [isRegisterd, setIsRegisterd] = useState(false);
-  const { isLoggedIn, userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

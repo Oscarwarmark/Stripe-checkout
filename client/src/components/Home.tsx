@@ -1,10 +1,11 @@
 import Header from "./Header";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { MyCartContext } from "../context/cartContext";
 import "../Styles/home.css";
 import Button from "@mui/material/Button";
 
 interface IProduct {
+  id: number;
   name: string;
   description: string;
   images: string[];
@@ -13,8 +14,6 @@ interface IProduct {
 const Home = () => {
   const { products, setProducts, cartItems, setCartItems } =
     useContext(MyCartContext);
-
-  // const [stripeProducts, setStripeProducts] = useState([]);
 
   useEffect(() => {
     async function ListOfProducts() {
@@ -32,7 +31,6 @@ const Home = () => {
         }
 
         const productsData = await response.json();
-        console.log(productsData);
         setProducts(productsData);
       } catch (error) {
         console.error("Error retrieving products:", error);
@@ -42,16 +40,16 @@ const Home = () => {
     ListOfProducts();
   }, []);
 
-  const handleClick = (product: any) => {
+  const handleClick = (product: IProduct) => {
     // Check if the product is already in the cart
     const existingCartItem = cartItems.find(
-      (item) => item.product.id === product.id
+      (item: any) => item.product.id === product.id
     );
 
     if (existingCartItem) {
       // If it exists, update the quantity
       const updatedCartItems = cartItems.map(
-        (item: { product: number; quantity: number }) => {
+        (item: { product: { id: number }; quantity: number }) => {
           if (item.product.id === product.id) {
             return { ...item, quantity: item.quantity + 1 };
           }
@@ -65,10 +63,6 @@ const Home = () => {
       setCartItems([...cartItems, { product: product, quantity: 1 }]);
     }
   };
-
-  useEffect(() => {
-    console.log(products);
-  }, []);
 
   return (
     <div>

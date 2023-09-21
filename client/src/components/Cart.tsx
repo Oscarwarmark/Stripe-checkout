@@ -51,7 +51,6 @@ const Cart = () => {
             <div key={i} className="cart-product-card">
               <img src={`${product.product.images}`} alt="" />
               <h1>{product.product.name}</h1>
-
               <p>Antal: {product.quantity}</p>
             </div>
           ))}

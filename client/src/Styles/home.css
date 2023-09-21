@@ -22,6 +22,7 @@ a {
   padding: 5px;
   margin: 5px;
   border-radius: 1rem;
+  border: 1px solid rgb(57, 129, 254);
 }
 
 .main-container {

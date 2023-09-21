@@ -4,7 +4,6 @@ import CartProvider from "./context/cartContext.tsx";
 import UserProvider from "./context/userContext.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-
   <CartProvider>
     <UserProvider>
       <App />
