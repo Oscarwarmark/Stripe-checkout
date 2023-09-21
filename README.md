@@ -4,7 +4,7 @@
 
 ### Projekt beskrivning:
 
-Det här projektet är en simpel webbshop med stripe integrerat för checkout processen. Det är byggt med hjälp utav nodeJS och express på backenden. och React för frontend.
+Det här projektet är en simpel webbshop med stripe integrerat för checkout processen. Det är byggt med hjälp utav nodeJS och express på backenden och React för frontend.
 
 ### För att köra projektet
 
